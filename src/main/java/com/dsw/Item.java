@@ -22,7 +22,10 @@ public class Item {
 		if (isImported) {
 			totalTax += TaxCalculator.calculateImportTax(price, importedTax);
 		}
-		return new PurchasedItem(this, price + totalTax, totalTax, quantity);
+
+		double totalPriceForAllPurchasedQuantity = (price + totalTax) * quantity;
+		double totalTaxForAllPurchasedQuantity = totalTax * quantity;
+		return new PurchasedItem(this, totalPriceForAllPurchasedQuantity, totalTaxForAllPurchasedQuantity, quantity);
 	}
 
 	public String getName() {
