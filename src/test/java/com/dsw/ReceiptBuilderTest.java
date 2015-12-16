@@ -8,21 +8,21 @@ import java.util.List;
 import org.junit.Test;
 
 public class ReceiptBuilderTest {
-	
+	//Can be read from anywhere i.e. database, property file etc
 	private static final double importedTax = 0.05;
 	private static final double salesTax = 0.10;
 
 	@Test
 	public void testShouldGenerateTheReceiptForNonImportedPurchasedItems() {
 
-		Item book = new Item("book", 1, Category.BOOK, 12.49, false);
-		Item music = new Item("music cd", 1, Category.OTHERS, 14.99, false);
-		Item chocolate = new Item("chocolate bar", 1, Category.FOOD, 0.85, false);
+		Item book = new Item("book", Category.BOOK, 12.49, false);
+		Item music = new Item("music cd", Category.OTHERS, 14.99, false);
+		Item chocolate = new Item("chocolate bar", Category.FOOD, 0.85, false);
 
 		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
-		purchasedItems.add(book.purchaseAndMaybeApplyTax(salesTax, importedTax));
-		purchasedItems.add(music.purchaseAndMaybeApplyTax(salesTax, importedTax));
-		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(book.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
+		purchasedItems.add(music.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
+		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		Receipt receipt = new Receipt(purchasedItems);
 		List<String> printReceipt = receipt.printReceipt();
 				
@@ -37,12 +37,12 @@ public class ReceiptBuilderTest {
 	@Test
 	public void testShouldGenerateTheReceiptForImportedPurchasedItems() {
 
-		Item chocolate = new Item("imported box of chocolates", 1, Category.FOOD, 10.00, true);
-		Item perfume = new Item("imported bottle of perfume", 1, Category.OTHERS, 47.50, true);
+		Item chocolate = new Item("imported box of chocolates", Category.FOOD, 10.00, true);
+		Item perfume = new Item("imported bottle of perfume", Category.OTHERS, 47.50, true);
 
 		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
-		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax));
-		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
+		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		Receipt receipt = new Receipt(purchasedItems);
 		
 		List<String> printReceipt = receipt.printReceipt();
@@ -58,16 +58,16 @@ public class ReceiptBuilderTest {
 	@Test
 	public void testShouldGenerateTheReceiptForImportedAndNonImportedPurchasedItems() {
 		
-		Item importedPerfume = new Item("imported bottle of perfume", 1, Category.OTHERS, 27.99, true);
-		Item perfume = new Item("bottle of perfume", 1, Category.OTHERS, 18.99, false);
-		Item medicine = new Item("packet of headache pills", 1, Category.MEDICINE, 9.75, false);
-		Item chocolate = new Item("box of imported chocolates", 1, Category.FOOD, 11.25, true);
+		Item importedPerfume = new Item("imported bottle of perfume", Category.OTHERS, 27.99, true);
+		Item perfume = new Item("bottle of perfume", Category.OTHERS, 18.99, false);
+		Item medicine = new Item("packet of headache pills",  Category.MEDICINE, 9.75, false);
+		Item chocolate = new Item("box of imported chocolates", Category.FOOD, 11.25, true);
 		
 		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
-		purchasedItems.add(importedPerfume.purchaseAndMaybeApplyTax(salesTax, importedTax));
-		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax));
-		purchasedItems.add(medicine.purchaseAndMaybeApplyTax(salesTax, importedTax));
-		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(importedPerfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
+		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
+		purchasedItems.add(medicine.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
+		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		Receipt receipt = new Receipt(purchasedItems);
 		
 		List<String> printReceipt = receipt.printReceipt();

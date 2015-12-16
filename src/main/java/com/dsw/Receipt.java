@@ -38,7 +38,7 @@ public class Receipt {
 		List<String> receiptOutput = new ArrayList<String>();
 		for (PurchasedItem i : purchasedItems) {
 			Item item = i.getItem();
-			receiptOutput.add(item.getQuantity() + " " + item.getName() + " : "
+			receiptOutput.add(i.getQuantity() + " " + item.getName() + " : "
 					+ decimalFormat.format(i.getPurchasedPrice()));
 		}
 		receiptOutput.add("Sales Taxes: " + decimalFormat.format(salesTax));

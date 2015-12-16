@@ -3,6 +3,7 @@ package com.dsw;
 public class PurchasedItem {
 
 	private Item item;
+	private int quantity;
 	private double purchasedPrice;
 	private double salesTax;
 
@@ -18,15 +19,16 @@ public class PurchasedItem {
 		return salesTax;
 	}
 
-	public PurchasedItem(Item item, double purchasedPrice, double salesTax) {
+	public PurchasedItem(Item item, double purchasedPrice, double salesTax, int quantity) {
 		this.item = item;
 		this.purchasedPrice = purchasedPrice;
 		this.salesTax = salesTax;
+		this.quantity = quantity;
 
 	}
 
 	public int getQuantity() {
-		return item.getQuantity();
+		return this.quantity;
 	}
 
 	public String getName() {
