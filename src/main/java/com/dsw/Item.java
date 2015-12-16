@@ -23,9 +23,9 @@ public class Item {
 			totalTax += TaxCalculator.calculateImportTax(price, importedTax);
 		}
 
-		double totalPriceForAllPurchasedQuantity = (price + totalTax) * quantity;
-		double totalTaxForAllPurchasedQuantity = totalTax * quantity;
-		return new PurchasedItem(this, totalPriceForAllPurchasedQuantity, totalTaxForAllPurchasedQuantity, quantity);
+		double totalPriceForAllPurchasedQuantities = (price + totalTax) * quantity;
+		double totalTaxForAllPurchasedQuantities = totalTax * quantity;
+		return new PurchasedItem(this, totalPriceForAllPurchasedQuantities, totalTaxForAllPurchasedQuantities, quantity);
 	}
 
 	public String getName() {
