@@ -2,7 +2,6 @@ package com.dsw;
 
 import static org.junit.Assert.assertEquals;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,21 +25,19 @@ public class ReceiptBuilderTest {
 		Item chocolate = new Item("chocolate bar", 1, Category.FOOD, 0.85, false);
 
 		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
-		purchasedItems.add(book.purchase(salesTax, importedTax));
-		purchasedItems.add(music.purchase(salesTax, importedTax));
-		purchasedItems.add(chocolate.purchase(salesTax, importedTax));
+		purchasedItems.add(book.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(music.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax));
 		Receipt receipt = new Receipt(purchasedItems);
+		List<String> printReceipt = receipt.printReceipt();
 				
-		DecimalFormat decimalFormat = new DecimalFormat("##.00");
-		assertEquals("1 book : 12.49", purchasedItems.get(0).getQuantity() + " " + purchasedItems.get(0).getName() + " : " + decimalFormat.format(purchasedItems.get(0).getPurchasedPrice()));
-		assertEquals("1 music cd : 16.49", purchasedItems.get(1).getQuantity() + " " + purchasedItems.get(1).getName() + " : " + decimalFormat.format(purchasedItems.get(1).getPurchasedPrice()));
-		assertEquals("1 chocolate bar : .85", purchasedItems.get(2).getQuantity() + " " + purchasedItems.get(2).getName() + " : " + decimalFormat.format(purchasedItems.get(2).getPurchasedPrice()));
-		assertEquals(receipt.purchasedItems.size(), 3);
-		assertEquals(1.50, receipt.salesTax,0.001);
-		assertEquals(29.83, receipt.totalPrice, 0.001);
-
+		assertEquals(printReceipt.size(), 5);
+		assertEquals("1 book : 12.49", printReceipt.get(0));
+		assertEquals("1 music cd : 16.49", printReceipt.get(1));
+		assertEquals("1 chocolate bar : .85", printReceipt.get(2));
+		assertEquals("Sales Taxes: 1.50", printReceipt.get(3));
+		assertEquals("Total: 29.83", printReceipt.get(4));
 	}
-
 
 	@Test
 	public void testShouldGenerateTheReceiptForImportedPurchasedItems() {
@@ -49,16 +46,44 @@ public class ReceiptBuilderTest {
 		Item perfume = new Item("imported bottle of perfume", 1, Category.OTHERS, 47.50, true);
 
 		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
-		purchasedItems.add(chocolate.purchase(salesTax, importedTax));
-		purchasedItems.add(perfume.purchase(salesTax, importedTax));
+		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax));
 		Receipt receipt = new Receipt(purchasedItems);
 		
-		DecimalFormat decimalFormat = new DecimalFormat("##.00");
-		assertEquals("1 imported box of chocolates : 10.50", purchasedItems.get(0).getQuantity() + " " + purchasedItems.get(0).getName() + " : " + decimalFormat.format(purchasedItems.get(0).getPurchasedPrice()));
-		assertEquals("1 imported bottle of perfume : 54.65", purchasedItems.get(0).getQuantity() + " " + purchasedItems.get(1).getName() + " : " + decimalFormat.format(purchasedItems.get(1).getPurchasedPrice()));
-		assertEquals(receipt.purchasedItems.size(), 2);
-		assertEquals(7.65, receipt.salesTax, 0.001);
-		assertEquals(65.15, receipt.totalPrice, 0.001);
+		List<String> printReceipt = receipt.printReceipt();
+		
+		assertEquals(printReceipt.size(), 4);
+		assertEquals("1 imported box of chocolates : 10.50", printReceipt.get(0));
+		assertEquals("1 imported bottle of perfume : 54.65", printReceipt.get(1));
+		assertEquals("Sales Taxes: 7.65", printReceipt.get(2));
+		assertEquals("Total: 65.15", printReceipt.get(3));
 
+	}
+
+	@Test
+	public void testShouldGenerateTheReceiptForImportedAndNonImportedPurchasedItems() {
+		
+		Item importedPerfume = new Item("imported bottle of perfume", 1, Category.OTHERS, 27.99, true);
+		Item perfume = new Item("bottle of perfume", 1, Category.OTHERS, 18.99, false);
+		Item medicine = new Item("packet of headache pills", 1, Category.MEDICINE, 9.75, false);
+		Item chocolate = new Item("box of imported chocolates", 1, Category.FOOD, 11.25, true);
+		
+		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
+		purchasedItems.add(importedPerfume.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(medicine.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax));
+		Receipt receipt = new Receipt(purchasedItems);
+		
+		List<String> printReceipt = receipt.printReceipt();
+		
+		assertEquals(printReceipt.size(), 6);
+		assertEquals("1 imported bottle of perfume : 32.19", printReceipt.get(0));
+		assertEquals("1 bottle of perfume : 20.89", printReceipt.get(1));
+		assertEquals("1 packet of headache pills : 9.75", printReceipt.get(2));
+		assertEquals("1 box of imported chocolates : 11.85", printReceipt.get(3));
+		assertEquals("Sales Taxes: 6.70", printReceipt.get(4));
+		assertEquals("Total: 74.68", printReceipt.get(5));
+		
 	}
 }

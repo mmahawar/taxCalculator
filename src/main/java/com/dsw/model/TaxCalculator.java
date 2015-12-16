@@ -2,16 +2,16 @@ package com.dsw.model;
 
 public class TaxCalculator {
 
-	public static double calculateSalesTax(Double price, Double salesTax){
+	public static double calculateSalesTax(double price, double salesTax){
 		 return roundSalesTaxToNearestHalf(price * salesTax);
 	}
 
-	public static double calculateImportTax(Double price, Double importTax){
+	public static double calculateImportTax(double price, double importTax){
 		return roundSalesTaxToNearestHalf(price * importTax);
 	}
 	
-	private static Double roundSalesTaxToNearestHalf(Double totalSalesTax) {
+	public static double roundSalesTaxToNearestHalf(double totalSalesTax) {
 		double accuracy = 0.05;
-		return Math.round(totalSalesTax.doubleValue() / accuracy) * accuracy;
+		return Math.ceil(totalSalesTax / accuracy) * accuracy;
 	}
 }

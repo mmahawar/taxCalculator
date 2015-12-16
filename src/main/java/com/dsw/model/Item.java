@@ -4,10 +4,10 @@ public class Item {
 	private final String name;
 	private final int quantity;
 	private final Category category;
-	private final Double price;
+	private final double price;
 	private final boolean isImported;
 
-	public Item(String name, int quantity, Category category, Double price, boolean isImported) {
+	public Item(String name, int quantity, Category category, double price, boolean isImported) {
 		this.name = name;
 		this.quantity = quantity;
 		this.category = category;
@@ -15,7 +15,7 @@ public class Item {
 		this.isImported = isImported;
 	}
 
-	public PurchasedItem purchase(Double salesTax, Double importedTax) {
+	public PurchasedItem purchaseAndMaybeApplyTax(double salesTax, double importedTax) {
 		double totalTax = 0;
 		if (!Category.isExempt(category)) {
 			totalTax += TaxCalculator.calculateSalesTax(price, salesTax);

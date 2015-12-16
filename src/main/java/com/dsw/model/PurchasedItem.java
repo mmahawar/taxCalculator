@@ -3,22 +3,22 @@ package com.dsw.model;
 public class PurchasedItem {
 
 	private Item item;
-	private Double purchasedPrice;
-	private Double salesTax;
+	private double purchasedPrice;
+	private double salesTax;
 
 	public Item getItem() {
 		return item;
 	}
 
-	public Double getPurchasedPrice() {
+	public double getPurchasedPrice() {
 		return purchasedPrice;
 	}
 
-	public Double getSalesTax() {
+	public double getSalesTax() {
 		return salesTax;
 	}
 
-	public PurchasedItem(Item item, Double purchasedPrice, Double salesTax) {
+	public PurchasedItem(Item item, double purchasedPrice, double salesTax) {
 		this.item = item;
 		this.purchasedPrice = purchasedPrice;
 		this.salesTax = salesTax;
