@@ -13,11 +13,11 @@ public class Receipt {
 
 	public Receipt(List<PurchasedItem> purchasedItems) {
 		this.purchasedItems = purchasedItems;
-		this.salesTax = salesTaxGatherer();
-		this.totalPrice = totalPriceGatherer();
+		this.salesTax = totalSalesTaxCalculator();
+		this.totalPrice = totalPriceCalculator();
 	}
 
-	private double salesTaxGatherer() {
+	private double totalSalesTaxCalculator() {
 		double salesTax = 0;
 		for (PurchasedItem item : purchasedItems) {
 			salesTax += item.getSalesTax();
@@ -25,7 +25,7 @@ public class Receipt {
 		return salesTax;
 	}
 
-	private double totalPriceGatherer() {
+	private double totalPriceCalculator() {
 		double totalItemPrice = 0;
 		for (PurchasedItem item : purchasedItems) {
 			totalItemPrice += item.getPurchasedPrice();
