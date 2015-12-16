@@ -7,11 +7,11 @@ import java.util.List;
 public class Receipt {
 
 	DecimalFormat decimalFormat = new DecimalFormat("##.00");
-	public List<PurchasedItem> purchasedItems;
+	public List<PurchasedLineItem> purchasedItems;
 	public double salesTax;
 	public double totalPrice;
 
-	public Receipt(List<PurchasedItem> purchasedItems) {
+	public Receipt(List<PurchasedLineItem> purchasedItems) {
 		this.purchasedItems = purchasedItems;
 		this.salesTax = totalSalesTaxCalculator();
 		this.totalPrice = totalPriceCalculator();
@@ -19,7 +19,7 @@ public class Receipt {
 
 	private double totalSalesTaxCalculator() {
 		double salesTax = 0;
-		for (PurchasedItem item : purchasedItems) {
+		for (PurchasedLineItem item : purchasedItems) {
 			salesTax += item.getSalesTax();
 		}
 		return salesTax;
@@ -27,7 +27,7 @@ public class Receipt {
 
 	private double totalPriceCalculator() {
 		double totalItemPrice = 0;
-		for (PurchasedItem item : purchasedItems) {
+		for (PurchasedLineItem item : purchasedItems) {
 			totalItemPrice += item.getPurchasedPrice();
 		}
 		return totalItemPrice;
@@ -36,7 +36,7 @@ public class Receipt {
 
 	public List<String> printReceipt() {
 		List<String> receiptOutput = new ArrayList<String>();
-		for (PurchasedItem i : purchasedItems) {
+		for (PurchasedLineItem i : purchasedItems) {
 			Item item = i.getItem();
 			receiptOutput.add(i.getQuantity() + " " + item.getName() + " : "
 					+ decimalFormat.format(i.getPurchasedPrice()));

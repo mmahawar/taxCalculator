@@ -19,7 +19,7 @@ public class ReceiptBuilderTest {
 		Item music = new Item("music cd", Category.OTHERS, 14.99, false);
 		Item chocolate = new Item("chocolate bar", Category.FOOD, 0.85, false);
 
-		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
+		List<PurchasedLineItem> purchasedItems = new ArrayList<PurchasedLineItem>();
 		purchasedItems.add(book.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		purchasedItems.add(music.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
@@ -40,7 +40,7 @@ public class ReceiptBuilderTest {
 		Item chocolate = new Item("imported box of chocolates", Category.FOOD, 10.00, true);
 		Item perfume = new Item("imported bottle of perfume", Category.OTHERS, 47.50, true);
 
-		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
+		List<PurchasedLineItem> purchasedItems = new ArrayList<PurchasedLineItem>();
 		purchasedItems.add(chocolate.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		Receipt receipt = new Receipt(purchasedItems);
@@ -63,7 +63,7 @@ public class ReceiptBuilderTest {
 		Item medicine = new Item("packet of headache pills", Category.MEDICINE, 9.75, false);
 		Item chocolate = new Item("box of imported chocolates", Category.FOOD, 11.25, true);
 
-		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
+		List<PurchasedLineItem> purchasedItems = new ArrayList<PurchasedLineItem>();
 		purchasedItems.add(importedPerfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		purchasedItems.add(medicine.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
@@ -90,7 +90,7 @@ public class ReceiptBuilderTest {
 		Item medicine = new Item("packet of headache pills", Category.MEDICINE, 9.75, false);
 		Item chocolate = new Item("box of imported chocolates", Category.FOOD, 11.25, true);
 
-		List<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
+		List<PurchasedLineItem> purchasedItems = new ArrayList<PurchasedLineItem>();
 		purchasedItems.add(importedPerfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 2));
 		purchasedItems.add(perfume.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));
 		purchasedItems.add(medicine.purchaseAndMaybeApplyTax(salesTax, importedTax, 1));

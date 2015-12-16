@@ -13,7 +13,7 @@ public class Item {
 		this.isImported = isImported;
 	}
 
-	public PurchasedItem purchaseAndMaybeApplyTax(double salesTax, double importedTax, int quantity) {
+	public PurchasedLineItem purchaseAndMaybeApplyTax(double salesTax, double importedTax, int quantity) {
 		double totalTax = 0;
 		if (!category.isExempt()) {
 			totalTax += TaxCalculator.calculateSalesTax(price, salesTax);
@@ -25,7 +25,7 @@ public class Item {
 
 		double totalPriceForAllPurchasedQuantities = (price + totalTax) * quantity;
 		double totalTaxForAllPurchasedQuantities = totalTax * quantity;
-		return new PurchasedItem(this, totalPriceForAllPurchasedQuantities, totalTaxForAllPurchasedQuantities, quantity);
+		return new PurchasedLineItem(this, totalPriceForAllPurchasedQuantities, totalTaxForAllPurchasedQuantities, quantity);
 	}
 
 	public String getName() {
