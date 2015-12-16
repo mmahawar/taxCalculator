@@ -1,4 +1,4 @@
-package com.dsw.model;
+package com.dsw;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

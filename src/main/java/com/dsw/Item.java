@@ -1,4 +1,4 @@
-package com.dsw.model;
+package com.dsw;
 
 public class Item {
 	private final String name;
@@ -17,7 +17,7 @@ public class Item {
 
 	public PurchasedItem purchaseAndMaybeApplyTax(double salesTax, double importedTax) {
 		double totalTax = 0;
-		if (!Category.isExempt(category)) {
+		if (!category.isExempt()) {
 			totalTax += TaxCalculator.calculateSalesTax(price, salesTax);
 		}
 

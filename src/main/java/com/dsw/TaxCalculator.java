@@ -1,4 +1,4 @@
-package com.dsw.model;
+package com.dsw;
 
 public class TaxCalculator {
 

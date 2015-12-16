@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.dsw.model.TaxCalculator;
-
 public class TaxCalculatorTest {
 
 	@Test

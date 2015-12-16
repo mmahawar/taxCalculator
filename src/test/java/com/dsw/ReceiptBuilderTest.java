@@ -7,11 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.dsw.model.Category;
-import com.dsw.model.Item;
-import com.dsw.model.PurchasedItem;
-import com.dsw.model.Receipt;
-
 public class ReceiptBuilderTest {
 	
 	private static final double importedTax = 0.05;
